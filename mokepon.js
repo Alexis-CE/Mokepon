@@ -198,15 +198,42 @@
         }
     }
 
+    function indexOponentes(jugador, enemigo) {
+        indexAtaqueJugador = ataqueJugador[jugador];
+        indexAtaqueEnemigo = ataqueEnemigo[enemigo];
+    }
+    
+
     function combate() {
         for (let index = 0; index < ataqueJugador.length; index++) {
             if (ataqueJugador[index] === ataqueEnemigo[index]) {
+                indexOponentes(index, index);
                 crearMensaje("EMPATE 😐");
+            } else if (ataqueJugador[index] === 'FUEGO' && ataqueEnemigo[index] === 'TIERRA') {
+                indexOponentes(index, index);
+                crearMensaje("GANASTE   🎉😎");
+                victoriasJugador++;
+                spanVidasJugador.innerHTML = victoriasJugador;
+            } else if (ataqueJugador[index] === 'AGUA' && ataqueEnemigo[index] === 'FUEGO') {
+                indexOponentes(index, index);
+                crearMensaje("GANASTE   🎉😎");
+                victoriasJugador++;
+                spanVidasJugador.innerHTML = victoriasJugador;
+            } else if (ataqueJugador[index] === 'TIERRA' && ataqueEnemigo[index] === 'AGUA') {
+                indexOponentes(index, index);
+                crearMensaje("GANASTE   🎉😎");
+                victoriasJugador++;
+                spanVidasJugador.innerHTML = victoriasJugador;
             } else {
+                indexOponentes(index, index);
                 crearMensaje("PERDISTE 😞😭");
+                victoriasEnemigo++;
+                spanVidasEnemigo.innerHTML = victoriasEnemigo;
                 break;
             }
         }
+    
+        victorias();
     }
 
     function crearMensaje(resultado) {
@@ -246,6 +273,13 @@
         }
     }
     
+    function crearMensajeFinal(resultadoFinal) {
+        let parrafo = document.createElement('p')
+    
+        sectionMensajes.innerHTML = resultadoFinal
+    
+        sectionReiniciar.style.display = 'block'
+    }
 
     function reiniciarJuego() {
         location.reload();
@@ -253,6 +287,16 @@
 
     function aleatorio(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    function victorias() {
+        if (victoriasJugador === victoriasEnemigo) {
+            crearMensajeFinal('EMPATE 😐');
+        } else if (victoriasJugador > victoriasEnemigo) {
+            crearMensajeFinal('FELICIDADES! Ganaste 😎');
+        } else {
+            crearMensajeFinal('Lo siento, Has Perdido 😓');
+        }
     }
 
     window.addEventListener('load', iniciarJuego);
