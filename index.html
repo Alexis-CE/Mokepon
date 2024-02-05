@@ -9,10 +9,23 @@
 <body>
     <div class="contenedor-principal">
         <section id="seleccionar-mascota">
-            <img class="titulo" src="./assets/titulo.png" alt="Título">
+            <img id="titulo" src="./assets/titulo.png" alt="Título">
             <h2 class="subtitulo">Elige a tu mascota:</h2>
             <div id="contenedorTarjetas" class="tarjetas"></div>
             <button id="boton-mascota">Seleccionar</button>
+        </section>
+
+        <section id="vMapa">
+            <img id="titulo-mapa" src="./assets/titulo.png" alt="Título">
+                <h1 class="titulo">Recorre el mapa con tu ✨MOKEPON✨</h1>
+                <canvas id="mapa"></canvas>
+                <button id="btnArriba"  ontouchstart="moverArriba()"  ontouchend="detenerMovimiento()" onmouseup="detenerMovimiento()" onmousedown="moverArriba()">arriba</button>
+                <div>
+                    <button id="btnIzquierda" ontouchstart="moverIzquierda()"  ontouchend="detenerMovimiento()" onmouseup="detenerMovimiento()" onmousedown="moverIzquierda()">izquierda</button>
+                    <button id="btnAbajo" ontouchstart="moverAbajo()"  ontouchend="detenerMovimiento()" onmouseup="detenerMovimiento()" onmousedown="moverAbajo()">abajo</button>
+                    <button id="btnDerecha" ontouchstart="moverDerecha()"  ontouchend="detenerMovimiento()" onmouseup="detenerMovimiento()" onmousedown="moverDerecha()">derecha</button>
+                </div>
+
         </section>
 
         <section id="seleccionar-ataque">  
@@ -39,7 +52,13 @@
                     <p id="mascota-enemigo"></p>
                     <div id="ataque-del-enemigo"></div>
                 </div>     
+                
             </div>
+            <h1>REGLAS:</h1>
+            <h3>FUEGO vence a TIERRA</h3>
+            <h3>AGUA vence a FUEGO</h3>
+            <h3>TIERRA vence a AGUA</h3>
+            <h3>TRUENO puede tener diferentes efectos: puede ser efectivo contra el agua o no tener ventaja sobre ningún otro tipo.</h3>
         </section>
     </div>
     <script src="./mokepon.js"></script>

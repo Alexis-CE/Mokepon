@@ -4,9 +4,12 @@
 
 body {
     font-family: 'Ruso One', sans-serif;
-    background-image: url("./assets/45486.png");
+    background-image: radial-gradient(circle at 50% -20.71%, #ff7f85 0, #ff748c 8.33%, #ff6994 16.67%, #ff5d9c 25%, #ff52a4 33.33%, #ff47ad 41.67%, #f23cb5 50%, #e234be 58.33%, #cf32c8 66.67%, #b935d2 75%, #9f3bdb 83.33%, #7e42e5 91.67%, #514aed 100%);
     background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; 
 }
+
 
 .contenedor-principal {
     display: flex;
@@ -21,13 +24,22 @@ body {
     height: auto;
 }
 
-.titulo {
+#titulo {
     width: 350px; 
     height: auto; 
     filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5)); 
     border-bottom: 2px solid white;
     padding-bottom: 10px; 
 }
+
+#titulo-mapa {
+    width: 350px; 
+    height: auto; 
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));    
+    padding-bottom: 10px; 
+}
+
+
 #seleccionar-mascota {
     display: flex;
     flex-direction: column;
@@ -119,6 +131,10 @@ input:checked + label {
     align-items: center;
 }
 
+#btnArriba, #btnAbajo, #btnIzquierda, #btnDerecha {
+    user-select: none;
+}
+
 .boton-de-ataque {
     background-color: aqua;
     padding: 15px 50px; 
@@ -191,6 +207,41 @@ input:checked + label {
     display: flex;
 }
 
+#vMapa {
+    flex-direction: column;
+    align-items: center;
+    display: inline-flex;
+}
+
+#vMapa button {
+    border-radius: 20px;
+    background: black;
+    border: 1px solid white;
+    color: white;
+    margin-top: 30px;
+    font-family: 'Poppins', sans-serif;
+    width: 100px;
+    height: 50px;
+    margin: 10px 0;
+}
+
+.titulo {
+    max-width: 550px;
+    height: auto; 
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5)); 
+    border-bottom: 2px solid white;
+    padding-bottom: 10px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    color: white;
+    font-style: bold;
+}
+
+#mapa {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); 
+}
+
 @media (max-width: 600px) {
     .contenedor-principal {
         flex-direction: column;
@@ -216,7 +267,7 @@ input:checked + label {
         height: 50px;
     }
 
-    .titulo {
+    #titulo {
         height: auto;
     }
 
@@ -230,3 +281,12 @@ input:checked + label {
         border-radius: 100px;
     }
 }   
+
+@media (max-width: 400px) {
+    #vMapa div{
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+}
