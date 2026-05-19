@@ -1,66 +1,136 @@
 <!DOCTYPE html>
-<html id="html" lang="es">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>✨MOKEPON✨</title>
-    <link rel="stylesheet" href="./styles.css">          
+    <title>MOKEPON</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/favicon.png">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    <div class="contenedor-principal">
-        <section id="seleccionar-mascota">
-            <img id="titulo" src="./assets/titulo.png" alt="Título">
-            <h2 class="subtitulo">Elige a tu mascota:</h2>
-            <div id="contenedorTarjetas" class="tarjetas"></div>
-            <button id="boton-mascota">Seleccionar</button>
-        </section>
 
-        <section id="vMapa">
-            <img id="titulo-mapa" src="./assets/titulo.png" alt="Título">
-                <h1 class="titulo">Recorre el mapa con tu ✨MOKEPON✨</h1>
-                <canvas id="mapa"></canvas>
-                <button id="btnArriba"  ontouchstart="moverArriba()"  ontouchend="detenerMovimiento()" onmouseup="detenerMovimiento()" onmousedown="moverArriba()">arriba</button>
-                <div>
-                    <button id="btnIzquierda" ontouchstart="moverIzquierda()"  ontouchend="detenerMovimiento()" onmouseup="detenerMovimiento()" onmousedown="moverIzquierda()">izquierda</button>
-                    <button id="btnAbajo" ontouchstart="moverAbajo()"  ontouchend="detenerMovimiento()" onmouseup="detenerMovimiento()" onmousedown="moverAbajo()">abajo</button>
-                    <button id="btnDerecha" ontouchstart="moverDerecha()"  ontouchend="detenerMovimiento()" onmouseup="detenerMovimiento()" onmousedown="moverDerecha()">derecha</button>
-                </div>
-
-        </section>
-
-        <section id="seleccionar-ataque">  
-            <img class="titulo" src="./assets/titulo.png" alt="Título">
-            <h2 class="subtitulo">Elige tu Ataque:</h2>
-            <div id="contenedorAtaques" class="tarjetas-ataques"></div>
-
-            <div id="mensajes">
-                <div id="resultado">¡Mucha suerte! 😎</div>
-                <section id="mensaje"></section>
-                <section id="reiniciar">
-                    <button id="boton-reiniciar">Reiniciar</button>
-                </section>
-            </div> 
-
-            <div class="ataques">
-                <div class="ataques-jugador">
-                    <p id="vidas-jugador">0</p>
-                    <p id="mascota-jugador"></p>
-                    <div id="ataque-del-jugador"></div>
-                </div>
-                <div class="ataques-enemigo">
-                    <p id="vidas-enemigo">0</p>
-                    <p id="mascota-enemigo"></p>
-                    <div id="ataque-del-enemigo"></div>
-                </div>     
-                
-            </div>
-                <h1>REGLAS:</h1>
-                    <h3>🔥FUEGO vence a 🌱TIERRA y ⚡TRUENO</h3>
-                    <h3>💧AGUA vence a 🔥FUEGO y 🌱TIERRA</h3>
-                    <h3>🌱TIERRA vence a 💧AGUA y ⚡TRUENO</h3>
-                    <h3>⚡TRUENO vence a 🔥FUEGO y 💧AGUA</h3>   
-        </section>
+<!-- ELEGIR MASCOTA -->
+<div id="pantalla-inicio" class="pantalla activa">
+    <div class="stars"></div>
+    <div class="inicio-wrap">
+        <img src="./assets/titulo.png" alt="Mokepon" class="logo-principal">
+        <p class="tagline">Elige a tu compañero de batalla</p>
+        <div id="contenedorTarjetas" class="grid-seleccion"></div>
+        <button id="boton-mascota" class="btn-accion">
+            ⚔️ &nbsp;¡A BATALLAR!
+        </button>
     </div>
-    <script src="./mokepon.js"></script>
+</div>
+
+<!-- MAPA  -->
+<div id="pantalla-mapa" class="pantalla">
+    <div class="stars"></div>
+    <div class="mapa-wrap">
+        <img src="./assets/titulo.png" alt="Mokepon" class="logo-mini">
+        <p class="mapa-instruccion">🗺️ ¡Muévete y <strong>choca con un enemigo</strong> para combatir!</p>
+        <div class="canvas-frame">
+            <canvas id="mapa"></canvas>
+        </div>
+        <div class="dpad">
+            <button class="dpad-btn" id="btnArriba"
+                ontouchstart="moverArriba()" ontouchend="detenerMovimiento()"
+                onmousedown="moverArriba()" onmouseup="detenerMovimiento()">▲</button>
+            <div class="dpad-row">
+                <button class="dpad-btn" id="btnIzquierda"
+                    ontouchstart="moverIzquierda()" ontouchend="detenerMovimiento()"
+                    onmousedown="moverIzquierda()" onmouseup="detenerMovimiento()">◀</button>
+                <div class="dpad-mid"></div>
+                <button class="dpad-btn" id="btnDerecha"
+                    ontouchstart="moverDerecha()" ontouchend="detenerMovimiento()"
+                    onmousedown="moverDerecha()" onmouseup="detenerMovimiento()">▶</button>
+            </div>
+            <button class="dpad-btn" id="btnAbajo"
+                ontouchstart="moverAbajo()" ontouchend="detenerMovimiento()"
+                onmousedown="moverAbajo()" onmouseup="detenerMovimiento()">▼</button>
+        </div>
+        <p class="teclado-hint">Teclado: ↑↓←→ o WASD</p>
+    </div>
+</div>
+
+<!-- BATALLA  -->
+<div id="pantalla-batalla" class="pantalla">
+    <div class="stars"></div>
+    <div class="batalla-wrap">
+
+        <img src="./assets/titulo.png" alt="Mokepon" class="logo-mini">
+
+
+        <div class="arena">
+            <div class="luchador luchador-izq">
+                <div class="luchador-etiqueta jugador-tag">TÚ</div>
+                <img id="sprite-jugador" src="" alt="" class="sprite">
+                <p id="mascota-jugador" class="luchador-nombre"></p>
+            </div>
+            <div class="vs-orb">VS</div>
+            <div class="luchador luchador-der">
+                <div class="luchador-etiqueta rival-tag">RIVAL</div>
+                <img id="sprite-enemigo" src="" alt="" class="sprite sprite-flip">
+                <p id="mascota-enemigo" class="luchador-nombre"></p>
+            </div>
+        </div>
+
+        <!-- Marcador de rondas -->
+        <div class="marcador">
+            <div class="m-bloque">
+                <span class="m-val" id="vidas-jugador">0</span>
+                <span class="m-lbl">tus victorias</span>
+            </div>
+            <div class="m-div">:</div>
+            <div class="m-bloque">
+                <span class="m-val" id="vidas-enemigo">0</span>
+                <span class="m-lbl">victorias rival</span>
+            </div>
+        </div>
+
+
+        <div id="resultado" class="resultado-ronda">
+            Elige tu ataque para la Ronda 1 ⚔️
+        </div>
+
+        <!-- Historial de rondas -->
+        <div class="historial" id="historial">
+            <div class="hist-col">
+                <span class="hist-header">Tus ataques</span>
+                <div id="ataque-del-jugador" class="hist-lista"></div>
+            </div>
+            <div class="hist-divisor"></div>
+            <div class="hist-col">
+                <span class="hist-header">Ataques rival</span>
+                <div id="ataque-del-enemigo" class="hist-lista"></div>
+            </div>
+        </div>
+
+
+        <p class="combate-instruccion">Gana <strong>2 de 3 rondas</strong> para ganar la batalla</p>
+
+        
+        <div id="contenedorAtaques" class="grid-ataques"></div>
+
+        
+        <details class="tipos-acordeon">
+            <summary>📖 Tabla de tipos</summary>
+            <div class="tipos-grid">
+                <div class="tipo-fila"><span class="chip fuego">🔥 Fuego</span> vence a <span class="chip tierra">🌼 Tierra</span></div>
+                <div class="tipo-fila"><span class="chip agua">💧 Agua</span> vence a <span class="chip fuego">🔥 Fuego</span> y <span class="chip tierra">🌼 Tierra</span></div>
+                <div class="tipo-fila"><span class="chip tierra">🌼 Tierra</span> vence a <span class="chip agua">💧 Agua</span> y <span class="chip trueno">⚡ Trueno</span></div>
+                <div class="tipo-fila"><span class="chip trueno">⚡ Trueno</span> vence a <span class="chip fuego">🔥 Fuego</span> y <span class="chip agua">💧 Agua</span></div>
+            </div>
+        </details>
+
+        <div id="resultado-final" class="resultado-final oculto"></div>
+        <div id="reiniciar" class="oculto">
+            <button id="boton-reiniciar" class="btn-reiniciar">🔄 Jugar de nuevo</button>
+        </div>
+
+        <div id="mensaje" style="display:none"></div>
+    </div>
+</div>
+
+<script src="./js/mokepon.js"></script>
 </body>
 </html>
